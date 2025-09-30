@@ -1,6 +1,6 @@
 # CMPS 2200 Assignment 2
 
-**Name:**_________________________
+**Name:**________Maeren Hay_________________
 
 In this assignment we'll work on applying the methods we've learned to analyze recurrences, and also see their behavior
 in practice. As with previous
@@ -174,11 +174,11 @@ Below, we'll solve this problem three different ways, using iterate, scan, and d
 
 **enter answer here**
 
-.  
-. 
-
-
-
+.  Work: W(n) = W(n-1)+ O(1)
+.  W(n) ∈ O(n)
+.  Span: S(n) = S(n-1) + O(1)
+.  S(n) ∈ O(n)
+.
 **3c. scan solution** Implement `parens_match_scan` a solution to this problem using `scan`. **Hint**: We have given you the function `paren_map` which maps `(` to `1`, `)` to `-1` and everything else to `0`. How can you pass this function to `scan` to solve the problem? You may also find the `min_f` function useful here. Implement `parens_match_scan` and test with `test_parens_match_scan`
 
 .  
@@ -190,12 +190,12 @@ Below, we'll solve this problem three different ways, using iterate, scan, and d
 
 **enter answer here**
 
-.  
-.  
-
-
-
-
+.  work: W(n)= O(n) + O(n) + O(n) = O(n)
+.  span: S(n)= O(1) + O(logn) +O(logn) = O(logn)
+. 
+. 
+. 
+. 
 **3e. divide and conquer solution** Implement `parens_match_dc_helper`, a divide and conquer solution to the problem. A key observation is that we *cannot* simply solve each subproblem using the above solutions and combine the results. E.g., consider '((()))', which would be split into '(((' and ')))', neither of which is matched. Yet, the whole input is matched. Instead, we'll have to keep track of two numbers: the number of unmatched right parentheses (R), and the number of unmatched left parentheses (L). `parens_match_dc_helper` returns a tuple (R,L). So, if the input is just '(', then `parens_match_dc_helper` returns (0,1), indicating that there is 1 unmatched left parens and 0 unmatched right parens. Analogously, if the input is just ')', then the result should be (1,0). The main difficulty is deciding how to merge the returned values for the two recursive calls. E.g., if (i,j) is the result for the left half of the list, and (k,l) is the output of the right half of the list, how can we compute the proper return value (R,L) using only i,j,k,l? Try a few example inputs to guide your solution, then test with `test_parens_match_dc_helper`.
 
 
@@ -211,11 +211,11 @@ Below, we'll solve this problem three different ways, using iterate, scan, and d
 
 **enter answer here**
 
+.  work: W(n) = 2W(n/2) + O(1)
+.  W(n) = O(n)
+.  Span: S(n) = S(n/2)+O(1)
+.  S(n) = O(logn)
+. 
 .  
 . 
-
-
- 
- 
-
 
