@@ -5,6 +5,10 @@ See assignment-02.md for details.
 from collections import defaultdict
 import math
 
+def iterate(update_fn, state, seq):
+    for x in seq:
+        state = update_fn(state, x)
+    return state
 #### Iterative solution
 def parens_match_iterative(mylist):
     """
@@ -53,7 +57,14 @@ def parens_update(current_output, next_input):
         return current_output
     ###
 
+def plus(x, y):
+    return x+y
 
+def reduce(f, id_, a):
+    result = id_
+    for x in a:
+        result = f(result, x)
+    return result
 
 
 
@@ -136,8 +147,8 @@ def parens_match_dc(mylist):
       True if parens_match_dc_helper returns (0,0); otherwise False
     """
     # done.
-    n_unmatched_left, n_unmatched_right = parens_match_dc_helper(mylist)
-    return n_unmatched_left==0 and n_unmatched_right==0
+    r, l = parens_match_dc_helper(mylist)
+    return r== 0 and l == 0
 
 def parens_match_dc_helper(mylist):
     """
@@ -151,23 +162,17 @@ def parens_match_dc_helper(mylist):
     ###TODO
     # Base cases
     if len(mylist) == 0:
-        return [0,0]
-    elif len(mylist) == 1:
-        if mylist[0] == '(':
-            return (0, 1) # one unmatched (
-        elif mylist[0] == ')':
-            return (1, 0) # one unmatched )    
+        return (0,0)
+    if len(mylist)==1:
+        if mylist[0]=='(':
+            return (0,1)
+        elif mylist[0]==')':
+            return (1,0)
         else:
-            return (0, 0)
-    i,j = parens_match_dc_helper(mylist[:len(mylist)//2])
-    k,l = parens_match_dc_helper(mylist[len(mylist)//2:])
-    # Combination:
-    # Return the tuple (R,L) using some combination of the values i,j,k,l defined above.
-    # This should be done in constant time.
-    if j > k:
-        return (i, l + j - k)
-    else:
-        return (i + k - j, l)
-    ###
-    
-
+            return (0,0)
+    mid = len(mylist)//2
+    r1, l1 = parens_match_dc_helper(mylist[:mid])
+    r2, l2 = parens_match_dc_helper(mylist[mid:])
+    m = min(l1, r2)
+    return (r1 +r2 - m, l1+l2 -m)
+            
